@@ -40,9 +40,9 @@ import {
   CheckCircle,
   Clock,
   Award,
-  Tool,
   Search,
   Filter,
+  Trash2,
 } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -260,7 +260,153 @@ export default function CrewManagement() {
               {selectedCrew ? 'Modify crew information and members' : 'Create a new crew'}
             </DialogDescription>
           </DialogHeader>
-          {/* Add the edit form content here */}
+          <Tabs defaultValue="details" className="mt-4">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="details">Crew Details</TabsTrigger>
+              <TabsTrigger value="members">Team Members</TabsTrigger>
+            </TabsList>
+            <TabsContent value="details" className="space-y-4 mt-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Crew Name</Label>
+                  <Input 
+                    placeholder="Enter crew name"
+                    defaultValue={selectedCrew?.name}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Specialties</Label>
+                  <Select defaultValue={selectedCrew?.specialties[0]}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select specialty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="custom-homes">Custom Homes</SelectItem>
+                      <SelectItem value="renovations">Major Renovations</SelectItem>
+                      <SelectItem value="kitchen">Kitchen Remodels</SelectItem>
+                      <SelectItem value="bathroom">Bathroom Remodels</SelectItem>
+                      <SelectItem value="additions">Home Additions</SelectItem>
+                      <SelectItem value="basement">Basement Finishing</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Current Job</Label>
+                  <Input 
+                    placeholder="Enter current job"
+                    defaultValue={selectedCrew?.currentJob}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Next Job</Label>
+                  <Input 
+                    placeholder="Enter next job"
+                    defaultValue={selectedCrew?.nextJob}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Rating</Label>
+                  <Input 
+                    type="number"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    placeholder="Enter rating"
+                    defaultValue={selectedCrew?.rating}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Completed Jobs</Label>
+                  <Input 
+                    type="number"
+                    placeholder="Enter completed jobs"
+                    defaultValue={selectedCrew?.completedJobs}
+                  />
+                </div>
+              </div>
+            </TabsContent>
+            <TabsContent value="members" className="space-y-4 mt-4">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Crew Leader</Label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Input 
+                      placeholder="Leader name"
+                      defaultValue={selectedCrew?.leader.name}
+                    />
+                    <Input 
+                      placeholder="Leader role"
+                      defaultValue={selectedCrew?.leader.role}
+                    />
+                    <Input 
+                      placeholder="Phone number"
+                      defaultValue={selectedCrew?.leader.phone}
+                    />
+                    <Input 
+                      placeholder="Email"
+                      defaultValue={selectedCrew?.leader.email}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <Label>Team Members</Label>
+                    <Button variant="outline" size="sm">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add Member
+                    </Button>
+                  </div>
+                  <div className="space-y-4">
+                    {selectedCrew?.members.map((member, index) => (
+                      <div key={member.id} className="grid grid-cols-2 gap-4 p-4 border rounded-lg">
+                        <Input 
+                          placeholder="Member name"
+                          defaultValue={member.name}
+                        />
+                        <Input 
+                          placeholder="Member role"
+                          defaultValue={member.role}
+                        />
+                        <Input 
+                          placeholder="Phone number"
+                          defaultValue={member.phone}
+                        />
+                        <Input 
+                          placeholder="Email"
+                          defaultValue={member.email}
+                        />
+                        <Select defaultValue={member.status}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select status" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="active">Active</SelectItem>
+                            <SelectItem value="on-leave">On Leave</SelectItem>
+                            <SelectItem value="unavailable">Unavailable</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button variant="destructive" size="sm">
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Remove
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+          <div className="flex justify-end space-x-2 mt-4">
+            <Button variant="outline" onClick={() => setEditMode(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => {
+              // Here you would normally save the crew data
+              handleSaveCrew(selectedCrew || mockCrews[0]) // Temporary, replace with actual data
+            }}>
+              {selectedCrew ? 'Save Changes' : 'Create Crew'}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
