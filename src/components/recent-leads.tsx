@@ -4,41 +4,47 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Phone, Mail, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 const recentLeads = [
   {
+    id: "1",
     name: "Olivia Martin",
     email: "olivia@example.com",
     phone: "(337) 555-0123",
-    service: "Lawn Mowing, 0.5 acres",
+    service: "Kitchen Remodel, 250 sq ft",
     status: "new",
   },
   {
+    id: "2",
     name: "Jackson Lee",
     email: "jackson@example.com",
     phone: "(337) 555-0124",
-    service: "Landscaping, 0.25 acres",
+    service: "Bathroom Renovation, 100 sq ft",
     status: "scheduled",
   },
   {
+    id: "3",
     name: "Isabella Nguyen",
     email: "isabella@example.com",
     phone: "(337) 555-0125",
-    service: "Tree Trimming, 0.75 acres",
+    service: "Home Addition, 400 sq ft",
     status: "completed",
   },
   {
+    id: "4",
     name: "William Kim",
     email: "william@example.com",
     phone: "(337) 555-0126",
-    service: "Lawn Mowing, 0.3 acres",
+    service: "Basement Finishing, 800 sq ft",
     status: "contacted",
   },
   {
+    id: "5",
     name: "Sofia Davis",
     email: "sofia@example.com",
     phone: "(337) 555-0127",
-    service: "Fertilization, 0.4 acres",
+    service: "Deck Construction, 300 sq ft",
     status: "follow-up",
   },
 ]
@@ -54,6 +60,7 @@ const statusColors = {
 const ITEMS_PER_PAGE = 3
 
 export function RecentLeads() {
+  const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(0)
   const totalPages = Math.ceil(recentLeads.length / ITEMS_PER_PAGE)
   const currentLeads = recentLeads.slice(
@@ -73,7 +80,7 @@ export function RecentLeads() {
               transition={{ delay: index * 0.1 }}
               key={lead.email}
               onClick={() => {
-                window.location.href = `/leads/${lead.id}`
+                navigate(`/leads/${lead.id}`)
               }}
               className="group relative flex items-center rounded-lg border p-3 mb-3 hover:bg-muted/50 transition-all duration-200 cursor-pointer"
             >

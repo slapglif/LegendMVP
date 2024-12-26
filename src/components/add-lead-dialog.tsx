@@ -130,12 +130,16 @@ export function AddLeadDialog({ onAddLeads }: AddLeadDialogProps) {
   }
 
   const serviceTypes = [
-    "Lawn Mowing",
-    "Edging",
-    "Fertilization",
-    "Weed Control",
-    "Leaf Removal",
-    "Full Service",
+    "Kitchen Remodel",
+    "Bathroom Renovation",
+    "Home Addition",
+    "Basement Finishing",
+    "Deck Construction",
+    "Whole House Renovation",
+    "Room Addition",
+    "Garage Conversion",
+    "Window Replacement",
+    "Siding Installation"
   ]
 
   return (
