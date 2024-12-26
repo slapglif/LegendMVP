@@ -12,6 +12,7 @@ import { CalendarDateRangePicker } from "../components/date-range-picker"
 import { Button } from "../components/ui/button"
 import { DateRange } from "react-day-picker"
 import { addDays } from "date-fns"
+import { BarChart, PieChart, LineChart } from "../components/analytics-charts"
 
 // Sample data for the table
 const data = [
@@ -172,27 +173,126 @@ export default function DashboardPage() {
             <DataTable data={data} columns={columns} />
           </TabsContent>
           <TabsContent value="analytics" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <Card className="col-span-2">
                 <CardHeader>
-                  <CardTitle>Service Distribution</CardTitle>
+                  <CardTitle>Revenue by Project Type</CardTitle>
                   <CardDescription>
-                    Breakdown of services by type
+                    Revenue distribution across different service categories
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Overview />
+                  <BarChart 
+                    data={[
+                      { name: "Kitchen Remodels", value: 245000 },
+                      { name: "Bathroom Renovations", value: 180000 },
+                      { name: "Home Additions", value: 320000 },
+                      { name: "Basement Finishing", value: 165000 },
+                      { name: "Deck Construction", value: 95000 },
+                      { name: "Whole House Reno", value: 450000 }
+                    ]}
+                  />
                 </CardContent>
               </Card>
-              <Card className="col-span-3">
+
+              <Card>
                 <CardHeader>
-                  <CardTitle>Status Distribution</CardTitle>
+                  <CardTitle>Project Status Distribution</CardTitle>
                   <CardDescription>
-                    Lead status breakdown
+                    Current project pipeline status
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Overview />
+                  <PieChart
+                    data={[
+                      { name: "Planning", value: 12 },
+                      { name: "In Progress", value: 25 },
+                      { name: "Completed", value: 18 },
+                      { name: "On Hold", value: 5 },
+                      { name: "Delayed", value: 8 }
+                    ]}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card className="col-span-2">
+                <CardHeader>
+                  <CardTitle>Project Timeline Performance</CardTitle>
+                  <CardDescription>
+                    Average project completion time trends (in days)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <LineChart
+                    data={[
+                      { name: "Jan", value: 45 },
+                      { name: "Feb", value: 42 },
+                      { name: "Mar", value: 48 },
+                      { name: "Apr", value: 40 },
+                      { name: "May", value: 35 },
+                      { name: "Jun", value: 38 }
+                    ]}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lead Source Analytics</CardTitle>
+                  <CardDescription>
+                    Distribution of lead sources
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PieChart
+                    data={[
+                      { name: "Referrals", value: 35 },
+                      { name: "Website", value: 28 },
+                      { name: "Social Media", value: 22 },
+                      { name: "Home Shows", value: 15 },
+                      { name: "Other", value: 10 }
+                    ]}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card className="col-span-2">
+                <CardHeader>
+                  <CardTitle>Monthly Revenue Trends</CardTitle>
+                  <CardDescription>
+                    Revenue performance over time
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <LineChart
+                    data={[
+                      { name: "Jan", value: 180000 },
+                      { name: "Feb", value: 220000 },
+                      { name: "Mar", value: 280000 },
+                      { name: "Apr", value: 320000 },
+                      { name: "May", value: 350000 },
+                      { name: "Jun", value: 420000 }
+                    ]}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Project Size Distribution</CardTitle>
+                  <CardDescription>
+                    Projects by square footage
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PieChart
+                    data={[
+                      { name: "< 500 sq ft", value: 25 },
+                      { name: "500-1000 sq ft", value: 35 },
+                      { name: "1000-2000 sq ft", value: 20 },
+                      { name: "2000+ sq ft", value: 20 }
+                    ]}
+                  />
                 </CardContent>
               </Card>
             </div>
