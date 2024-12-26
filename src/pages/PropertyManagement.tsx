@@ -239,16 +239,16 @@ export default function PropertyManagement() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-6">
         {filteredProperties.map((property) => (
           <Card key={property.id} className="overflow-hidden">
-            <div className="aspect-video relative overflow-hidden">
+            <div className="aspect-video relative overflow-hidden bg-muted">
               {property.images[0] && (
                 <img
                   src={property.images[0].url}
                   alt={property.images[0].caption}
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                  className="object-cover w-full h-full absolute inset-0"
                 />
               )}
               <Badge 
-                className={`absolute top-2 right-2 ${statusColors[property.projectStatus as keyof typeof statusColors]}`}
+                className={`absolute top-2 right-2 z-10 ${statusColors[property.projectStatus as keyof typeof statusColors]}`}
               >
                 {property.projectStatus}
               </Badge>

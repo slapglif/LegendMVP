@@ -62,8 +62,8 @@ export function RecentLeads() {
   )
 
   return (
-    <div className="h-[400px] flex flex-col">
-      <div className="flex-1 overflow-hidden">
+    <div className="h-[450px] flex flex-col">
+      <div className="flex-1 overflow-y-auto pr-2">
         <AnimatePresence mode="wait">
           {currentLeads.map((lead, index) => (
             <motion.div
@@ -72,7 +72,10 @@ export function RecentLeads() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: index * 0.1 }}
               key={lead.email}
-              className="group relative flex items-center rounded-lg border p-3 mb-3 hover:bg-muted/50 transition-all duration-200"
+              onClick={() => {
+                window.location.href = `/leads/${lead.id}`
+              }}
+              className="group relative flex items-center rounded-lg border p-3 mb-3 hover:bg-muted/50 transition-all duration-200 cursor-pointer"
             >
               <div className="flex items-start space-x-4">
                 <Avatar className="h-10 w-10 transition-transform group-hover:scale-105">

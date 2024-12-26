@@ -153,6 +153,7 @@ export default function CrewManagement() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false)
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
   const filteredCrews = crews.filter(
     (crew) =>
@@ -319,13 +320,13 @@ export default function CrewManagement() {
                   size="sm"
                   onClick={() => {
                     setSelectedCrew(crew)
-                    setIsDetailsDialogOpen(true)
+                    setIsEditDialogOpen(true)
                   }}
                 >
-                  <Calendar className="h-4 w-4" />
+                  <Edit2 className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="sm">
-                  <Edit2 className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
             </CardFooter>
@@ -558,6 +559,36 @@ export default function CrewManagement() {
                     </div>
                   </CardContent>
                 </Card>
+              </TabsContent>
+            </Tabs>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-[900px]">
+          <DialogHeader>
+            <DialogTitle>Edit Crew</DialogTitle>
+            <DialogDescription>
+              Modify crew information and members
+            </DialogDescription>
+          </DialogHeader>
+          {selectedCrew && (
+            <Tabs defaultValue="overview" className="mt-4">
+              <TabsList>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="members">Members</TabsTrigger>
+                <TabsTrigger value="schedule">Schedule</TabsTrigger>
+              </TabsList>
+              <TabsContent value="overview">
+                {/* Overview content */}
+              </TabsContent>
+              <TabsContent value="members">
+                {/* Members content */}
+              </TabsContent>
+              <TabsContent value="schedule">
+                {/* Schedule content */}
               </TabsContent>
             </Tabs>
           )}
